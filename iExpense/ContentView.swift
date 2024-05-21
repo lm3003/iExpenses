@@ -5,53 +5,77 @@
 //  Created by Luv Modi on 5/17/24.
 //
 
+//iExpense will get user expense and classify it as personal or business expense
+
+//create expense
+
+struct ExpenseItem: Identifiable, Codable {
+    var id = UUID()
+    let name: String
+    let value: Double
+    let type: String
+}
+
+@Observable
+class UserExpense {
+    var expenses = [ExpenseItem]() {
+        didSet {
+            if let encodedExpenses = try? JSONEncoder().encode(expenses) {
+                UserDefaults.standard.set(encodedExpenses, forKey: "expenses")
+            }
+        }
+    }
+    
+    init() {
+        if let savedExpenses = UserDefaults.standard.data(forKey: "expenses") {
+            if let decodedExpenses = try? JSONDecoder().decode([ExpenseItem].self, from: savedExpenses) {
+                expenses = decodedExpenses
+                return
+            }
+        }
+        expenses = []
+    }
+}
+
 import SwiftUI
 import SwiftData
 
+
+
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var userExpense = UserExpense()
+    @State private var showingExpense = false
 
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                ForEach(userExpense.expenses) { item in
+                    HStack {
+                        VStack {
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                        }
+                        Spacer()
+                        Text(item.value, format: .currency(code: "USD"))
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteAction)
             }
+            .navigationTitle("iExpenses")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                Button("Add Expense", systemImage: "plus") {
+                    showingExpense = true
                 }
             }
-        } detail: {
-            Text("Select an item")
+            .sheet(isPresented: $showingExpense, content: {
+                AddExpense(expense: userExpense)
+            })
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+    
+    func deleteAction(at offset: IndexSet) {
+        userExpense.expenses.remove(atOffsets: offset)
     }
 }
 

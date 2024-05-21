@@ -12,6 +12,7 @@
 		B348A2792BF81ABB003F2EC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A2782BF81ABB003F2EC8 /* Item.swift */; };
 		B348A27B2BF81ABD003F2EC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B348A27A2BF81ABD003F2EC8 /* Assets.xcassets */; };
 		B348A27E2BF81ABD003F2EC8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B348A27D2BF81ABD003F2EC8 /* Preview Assets.xcassets */; };
+		B348A2852BFC0F5E003F2EC8 /* AddExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348A2842BFC0F5E003F2EC8 /* AddExpense.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		B348A2782BF81ABB003F2EC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B348A27A2BF81ABD003F2EC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B348A27D2BF81ABD003F2EC8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B348A2842BFC0F5E003F2EC8 /* AddExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				B348A2742BF81ABB003F2EC8 /* iExpenseApp.swift */,
 				B348A2762BF81ABB003F2EC8 /* ContentView.swift */,
+				B348A2842BFC0F5E003F2EC8 /* AddExpense.swift */,
 				B348A2782BF81ABB003F2EC8 /* Item.swift */,
 				B348A27A2BF81ABD003F2EC8 /* Assets.xcassets */,
 				B348A27C2BF81ABD003F2EC8 /* Preview Content */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B348A2852BFC0F5E003F2EC8 /* AddExpense.swift in Sources */,
 				B348A2772BF81ABB003F2EC8 /* ContentView.swift in Sources */,
 				B348A2792BF81ABB003F2EC8 /* Item.swift in Sources */,
 				B348A2752BF81ABB003F2EC8 /* iExpenseApp.swift in Sources */,
